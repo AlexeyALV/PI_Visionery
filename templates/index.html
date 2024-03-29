@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Visionery by &lt;ALV&gt;</title>
+    <script>
+    function tb_content() {
+       var data_s = {{ data_list }};
+       var mes_s = ["январь","февраль","март","апрель","май","июнь","июль","август","сентябрь","октябрь","ноябрь","декабрь"];
+       var table = document.getElementById("src_data"),
+           tb = table.getElementsByTagName("tbody")[0];
+
+       var row = document.createElement("tr");
+       var cell = document.createElement("td");
+       cell.innerHTML = "";
+       row.appendChild(cell);
+       for (var i = 1991; i <= {{ end_year }}; i++) {
+         cell = document.createElement("td");
+         cell.innerHTML = i.toString();
+         row.appendChild(cell);
+       }
+       tb.appendChild(row);
+       for (i = 0; i < 12; i++) {
+         row = document.createElement("tr");
+         cell = document.createElement("td");
+         cell.innerHTML = mes_s[i];
+         row.appendChild(cell);
+         for (j = i; j <= i + 12 * ({{ end_year }} - 1991); j = j + 12) {
+           cell = document.createElement("td");
+           if (data_s[j] != null)
+             cell.innerHTML = data_s[j].toString();
+           else
+             cell.innerHTML = "";
+           row.appendChild(cell);
+         }
+         tb.appendChild(row);
+       }
+    }
+    </script>
+</head>
+<body onload="tb_content()">
+
+    <h1>Статистика по индексам цен на товары и услуги РФ с 1991 по {{ end_year }}</h1>
+    <p><strong>Источник статистики:</strong> {{ data_source }}</p>
+    <div>
+        <p><strong>Данные:</strong></p>
+        <table id="src_data" border="1">
+            <tbody></tbody>
+        </table>
+    </div>
+    <div>
+        <p><strong>Модель:</strong> ARIMA</p>
+        <p><strong>Нормальное распределение:</strong> {{ norm }}</p>
+        <p><strong>Качество модели:</strong> {{ quality }}</p>
+    </div>
+    <img src="{{ url_for('static', filename='diag.png') }}" width = 90%/>
+</body>
+</html>
