@@ -81,4 +81,4 @@ def index():
                            quality = "MSE: " + str(mse) + "   MAE: " + str(mae))
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)
