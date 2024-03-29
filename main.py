@@ -27,7 +27,7 @@ x_m = 1  # начальный столбец
 
 while x_m < iYer - 1989:
     while y_m < 16:
-        if x_m == iYer - 1990 and y_m == 4 + iMon:  # for last year to get only to last month
+        if x_m == iYer - 1990 and y_m == 4 + iMon:  # Для последнего года берем только до последнего отчетного месяца
             break
         lFullData.append(lData.iloc[y_m,x_m])
         y_m += 1
